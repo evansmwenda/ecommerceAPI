@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Controllers\ProdutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/products','ProductController');
+
+Route::group(['prefix'=>'products'], function (){
+
+	//products/11/reviews
+	Route::apiResource('/{product}/reviews','ReviewController');
+} );
